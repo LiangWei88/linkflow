@@ -36,4 +36,4 @@ export const createTables = `
     content='blocks',
     content_rowid='id'
   );
-`;
+`
