@@ -1,3 +1,13 @@
+import fs from 'fs';
+import path from 'path';
+
+// 删除测试数据库文件
+const testDbPath = path.resolve(process.cwd(), 'data/test_linkflow.db');
+if (fs.existsSync(testDbPath)) {
+  fs.unlinkSync(testDbPath);
+}
+
+// 现在导入数据库相关模块
 import { BlockRepository } from '../repositories/BlockRepository';
 import { db } from '../db';
 
@@ -26,6 +36,7 @@ describe('BlockRepository', () => {
     expect(block.id).toBeDefined();
     expect(block.docId).toBe(testDocId);
     expect(block.content).toBe('Test block content');
+    expect(block.parentId).toBeNull();
     expect(block.blockOrder).toBe(0);
   });
 
@@ -101,7 +112,53 @@ describe('BlockRepository', () => {
       blockOrder: 1,
     });
 
-    const maxOrder = repository.getMaxOrder(testDocId);
+    const maxOrder = repository.getMaxOrder(testDocId, null);
+
+    expect(maxOrder).toBe(1);
+  });
+
+  test('should create a block with parentId', () => {
+    // 创建父块
+    const parentBlock = repository.create({
+      docId: testDocId,
+      content: 'Parent block',
+    });
+
+    // 创建子块
+    const childBlock = repository.create({
+      docId: testDocId,
+      content: 'Child block',
+      parentId: parentBlock.id,
+    });
+
+    expect(childBlock).toBeDefined();
+    expect(childBlock.parentId).toBe(parentBlock.id);
+    expect(childBlock.blockOrder).toBe(0);
+  });
+
+  test('should get max order with parentId', () => {
+    // 创建父块
+    const parentBlock = repository.create({
+      docId: testDocId,
+      content: 'Parent block',
+    });
+
+    // 创建子块
+    repository.create({
+      docId: testDocId,
+      content: 'Child 1',
+      parentId: parentBlock.id,
+      blockOrder: 0,
+    });
+
+    repository.create({
+      docId: testDocId,
+      content: 'Child 2',
+      parentId: parentBlock.id,
+      blockOrder: 1,
+    });
+
+    const maxOrder = repository.getMaxOrder(testDocId, parentBlock.id);
 
     expect(maxOrder).toBe(1);
   });

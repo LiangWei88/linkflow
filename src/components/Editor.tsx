@@ -10,7 +10,7 @@ interface EditorProps {
 }
 
 // 防抖函数
-function debounce<T extends (...args: unknown[]) => void>(
+function debounce<T extends (...args: any[]) => any>(
   fn: T,
   delay: number
 ): (...args: Parameters<T>) => void {
@@ -21,7 +21,7 @@ function debounce<T extends (...args: unknown[]) => void>(
   };
 }
 
-export function Editor({ docId }: EditorProps): JSX.Element {
+export function Editor({ docId }: EditorProps): React.ReactElement {
   const [block, setBlock] = useState<Block | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved'>('saved');

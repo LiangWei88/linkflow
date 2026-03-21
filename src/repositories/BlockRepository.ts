@@ -7,19 +7,21 @@ export class BlockRepository {
     const id = `block_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
     const now = new Date().toISOString();
     const blockOrder = block.blockOrder ?? 0;
+    const parentId = block.parentId ?? null;
 
     // 使用参数化查询来避免 SQL 注入和数据类型问题
     const stmt = db.prepare(`
-      INSERT INTO blocks (id, docId, content, blockOrder, createdAt, updatedAt)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO blocks (id, docId, content, parentId, blockOrder, createdAt, updatedAt)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
 
-    stmt.run(id, block.docId, block.content, blockOrder, now, now);
+    stmt.run(id, block.docId, block.content, parentId, blockOrder, now, now);
 
     return {
       id,
       docId: block.docId,
       content: block.content,
+      parentId,
       blockOrder: Number(blockOrder),
       createdAt: now,
       updatedAt: now,
@@ -35,7 +37,7 @@ export class BlockRepository {
 
   // 根据 docId 获取所有 blocks
   getByDocId(docId: string): Block[] {
-    const stmt = db.prepare('SELECT * FROM blocks WHERE docId = ? ORDER BY blockOrder ASC');
+    const stmt = db.prepare('SELECT * FROM blocks WHERE docId = ? ORDER BY parentId NULLS FIRST, blockOrder ASC');
     const results = stmt.all(docId);
     return results as Block[];
   }
@@ -47,19 +49,21 @@ export class BlockRepository {
 
     const now = new Date().toISOString();
     const content = updates.content ?? existing.content;
+    const parentId = updates.parentId ?? existing.parentId;
     const blockOrder = updates.blockOrder ?? existing.blockOrder;
 
     const stmt = db.prepare(`
       UPDATE blocks
-      SET content = ?, blockOrder = ?, updatedAt = ?
+      SET content = ?, parentId = ?, blockOrder = ?, updatedAt = ?
       WHERE id = ?
     `);
 
-    stmt.run(content, blockOrder, now, id);
+    stmt.run(content, parentId, blockOrder, now, id);
 
     return {
       ...existing,
       content,
+      parentId,
       blockOrder,
       updatedAt: now,
     };
@@ -73,9 +77,18 @@ export class BlockRepository {
   }
 
   // 获取最大 blockOrder 值
-  getMaxOrder(docId: string): number {
-    const stmt = db.prepare('SELECT MAX(blockOrder) as maxOrder FROM blocks WHERE docId = ?');
-    const result = stmt.get(docId);
+  getMaxOrder(docId: string, parentId: string | null = null): number {
+    let stmt;
+    let result;
+    
+    if (parentId === null) {
+      stmt = db.prepare('SELECT MAX(blockOrder) as maxOrder FROM blocks WHERE docId = ? AND parentId IS NULL');
+      result = stmt.get(docId);
+    } else {
+      stmt = db.prepare('SELECT MAX(blockOrder) as maxOrder FROM blocks WHERE docId = ? AND parentId = ?');
+      result = stmt.get(docId, parentId);
+    }
+    
     return (result as { maxOrder: number | null }).maxOrder ?? -1;
   }
 }

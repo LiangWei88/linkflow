@@ -1,3 +1,13 @@
+import fs from 'fs';
+import path from 'path';
+
+// 删除测试数据库文件
+const testDbPath = path.resolve(process.cwd(), 'data/test_linkflow.db');
+if (fs.existsSync(testDbPath)) {
+  fs.unlinkSync(testDbPath);
+}
+
+// 现在导入数据库相关模块
 import { BlockService } from '../services/BlockService';
 import { db } from '../db';
 

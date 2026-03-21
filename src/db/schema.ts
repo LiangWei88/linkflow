@@ -4,6 +4,7 @@ export const createTables = `
     id TEXT PRIMARY KEY,
     docId TEXT NOT NULL,
     content TEXT NOT NULL,
+    parentId TEXT NULL,
     blockOrder INTEGER NOT NULL,
     createdAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -11,7 +12,8 @@ export const createTables = `
 
   -- 创建索引
   CREATE INDEX IF NOT EXISTS idx_blocks_docId ON blocks(docId);
-  CREATE INDEX IF NOT EXISTS idx_blocks_order ON blocks(docId, blockOrder);
+  CREATE INDEX IF NOT EXISTS idx_blocks_order ON blocks(docId, parentId, blockOrder);
+  CREATE INDEX IF NOT EXISTS idx_blocks_parent ON blocks(parentId);
 
   -- backlinks 表：存储双向链接
   CREATE TABLE IF NOT EXISTS backlinks (

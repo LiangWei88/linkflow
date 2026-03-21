@@ -5,9 +5,11 @@ export class BlockService {
   // 创建新的 block
   createBlock(block: BlockCreate): Block {
     // 自动计算 blockOrder 值
-    const maxOrder = blockRepository.getMaxOrder(block.docId);
+    const parentId = block.parentId ?? null;
+    const maxOrder = blockRepository.getMaxOrder(block.docId, parentId);
     const newBlock = {
       ...block,
+      parentId,
       blockOrder: block.blockOrder ?? maxOrder + 1,
     };
 
@@ -35,7 +37,7 @@ export class BlockService {
   }
 
   // 批量更新 blocks 的 blockOrder
-  updateBlockOrders(docId: string, blockIds: string[]): void {
+  updateBlockOrders(_docId: string, blockIds: string[]): void {
     blockIds.forEach((blockId, index) => {
       blockRepository.update(blockId, { blockOrder: index });
     });
