@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "skills": {
+    "accordion": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "fb049eeb5f4069b66b05d2a0ab79076fb02edfd43fe43b85919f4f94153068a6"
+    },
+    "autocomplete": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "3b1b96a84bc4f62234786fefed82f98dea905e84e8c927409361592242ae3efe"
+    },
+    "breadcrumb": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "cd9bf2de7b3e9d7b25bdf48af8e0734a78f4ec51b6b965b21decd337c7440863"
+    },
+    "calendar": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "b3abc8aac79ed40acba4aba739e9da11c6462c4479803abac8b4cff31150ba89"
+    },
+    "chart": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "f169068b849f043504f9c0c4d7532b8c0adb5f9b7ce574715efd2e616897dad8"
+    },
+    "checkbox": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "a606a53b23cde275ff0743954f26d87b32b18f2df2dad00f7774fb79311f10b4"
+    },
+    "drag-and-drop": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "c3fc14b67e3e8443fa057d46ab1119870cb9df4c1d3a9985c6f60aaf3f5893fa"
+    },
+    "empty-states": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "4ae18071c0de7a170cc8749c0584a361c4109bdce9bd56a2e8ae3706c93c8a1b"
+    },
+    "link": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "d4513ea8ac3efbcafc38884626ca39763a632db6d5d183e5b2b64f78c7122f2d"
+    },
+    "navigation-menu": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "6ec66d71c9074a0e20926262ab126b47d9bedd180cf3ae910e69c6e0ed46ae56"
+    },
+    "notification": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "2536293d66af19ddacd545d5f7f89202994a894bf33baa95df0e709e36c9fb05"
+    },
+    "search-field": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "cdf255aa25c52a2d64fb189475f56d7ee239c3a984c87bcbd831285c55ce3c0d"
+    },
+    "search-results": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "f16a80e05c294f42a70de3581c581e137ec365e54462751cee75bb909977cc46"
+    },
+    "statistics": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "1f6e0333520f25798c7157865db345d3a8befff30e9b7662fc50150fe1895cee"
+    },
+    "tree-view": {
+      "source": "thedaviddias/ux-patterns-for-developers",
+      "sourceType": "github",
+      "computedHash": "3467553170f0cbe65f05ea632c6f8b8134fd4da996ad58810fb86e72d254c91f"
+    }
+  }
+}
