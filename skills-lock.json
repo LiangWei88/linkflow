@@ -56,6 +56,26 @@
       "sourceType": "github",
       "computedHash": "2536293d66af19ddacd545d5f7f89202994a894bf33baa95df0e709e36c9fb05"
     },
+    "progressive-web-app": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "78fd7be09fe76f18cb711562e210a55cb8afdc29839df3eecdc7d93336474091"
+    },
+    "react-modernization": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "06ec6346d2776f87e14075d1880d863387344c22051eb048f7a6edede41dd0ff"
+    },
+    "react-nextjs-development": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "0917c248721c87d150492e818e67254b3697c3f6ed20293d4fd85323f4cfb15d"
+    },
+    "react-ui-patterns": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "6c004e2900e1c11452e3de3ff144e287daf69fcdcb6f27c11483d34bddb57326"
+    },
     "search-field": {
       "source": "thedaviddias/ux-patterns-for-developers",
       "sourceType": "github",
