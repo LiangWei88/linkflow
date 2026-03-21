@@ -4,17 +4,17 @@ import type { Block, BlockCreate, BlockUpdate } from '../types/block';
 export class BlockRepository {
   // 创建新的 block
   create(block: BlockCreate): Block {
-    const id = `block_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const id = `block_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
     const now = new Date().toISOString();
     const blockOrder = block.blockOrder ?? 0;
 
-    // 使用字符串拼接来构建 SQL 语句，确保类型正确
-    const sql = `
+    // 使用参数化查询来避免 SQL 注入和数据类型问题
+    const stmt = db.prepare(`
       INSERT INTO blocks (id, docId, content, blockOrder, createdAt, updatedAt)
-      VALUES ('${id}', '${block.docId}', '${block.content.replace(/'/g, "''")}', ${blockOrder}, '${now}', '${now}')
-    `;
+      VALUES (?, ?, ?, ?, ?, ?)
+    `);
 
-    db.exec(sql);
+    stmt.run(id, block.docId, block.content, blockOrder, now, now);
 
     return {
       id,
