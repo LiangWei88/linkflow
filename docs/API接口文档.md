@@ -72,6 +72,7 @@ http://localhost:3001/api
       "id": "block_123",
       "docId": "test-doc",
       "content": "内容",
+      "parentId": null, // 父节点 ID，null 表示顶级节点
       "blockOrder": 0,
       "createdAt": "2026-03-21T00:00:00.000Z",
       "updatedAt": "2026-03-21T00:00:00.000Z"
@@ -95,6 +96,7 @@ http://localhost:3001/api
     "id": "block_123",
     "docId": "test-doc",
     "content": "内容",
+    "parentId": null, // 父节点 ID，null 表示顶级节点
     "blockOrder": 0,
     "createdAt": "2026-03-21T00:00:00.000Z",
     "updatedAt": "2026-03-21T00:00:00.000Z"
@@ -111,6 +113,7 @@ http://localhost:3001/api
 {
   "docId": "test-doc",
   "content": "内容",
+  "parentId": null, // 父节点 ID，null 表示顶级节点
   "blockOrder": 0
 }
 ```
@@ -123,6 +126,7 @@ http://localhost:3001/api
     "id": "block_123",
     "docId": "test-doc",
     "content": "内容",
+    "parentId": null, // 父节点 ID，null 表示顶级节点
     "blockOrder": 0,
     "createdAt": "2026-03-21T00:00:00.000Z",
     "updatedAt": "2026-03-21T00:00:00.000Z"
@@ -141,6 +145,7 @@ http://localhost:3001/api
 ```json
 {
   "content": "更新后的内容",
+  "parentId": "parent_block_id", // 父节点 ID，null 表示顶级节点
   "blockOrder": 1
 }
 ```
@@ -153,6 +158,7 @@ http://localhost:3001/api
     "id": "block_123",
     "docId": "test-doc",
     "content": "更新后的内容",
+    "parentId": "parent_block_id", // 父节点 ID，null 表示顶级节点
     "blockOrder": 1,
     "createdAt": "2026-03-21T00:00:00.000Z",
     "updatedAt": "2026-03-21T00:00:00.000Z"
@@ -382,6 +388,7 @@ export interface Block {
   id: string;
   docId: string;
   content: string;
+  parentId: string | null; // 父节点 ID，null 表示顶级节点
   blockOrder: number;
   createdAt: string;
   updatedAt: string;
@@ -390,11 +397,13 @@ export interface Block {
 export interface BlockCreate {
   docId: string;
   content: string;
+  parentId?: string | null; // 父节点 ID，null 表示顶级节点
   blockOrder?: number;
 }
 
 export interface BlockUpdate {
   content?: string;
+  parentId?: string | null; // 父节点 ID，null 表示顶级节点
   blockOrder?: number;
 }
 ```
