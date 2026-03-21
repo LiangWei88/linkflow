@@ -1,0 +1,83 @@
+import { db } from '../db';
+import type { Block, BlockCreate, BlockUpdate } from '../types/block';
+
+export class BlockRepository {
+  // 创建新的 block
+  create(block: BlockCreate): Block {
+    const id = `block_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const now = new Date().toISOString();
+    const blockOrder = block.blockOrder ?? 0;
+
+    // 使用字符串拼接来构建 SQL 语句，确保类型正确
+    const sql = `
+      INSERT INTO blocks (id, docId, content, blockOrder, createdAt, updatedAt)
+      VALUES ('${id}', '${block.docId}', '${block.content.replace(/'/g, "''")}', ${blockOrder}, '${now}', '${now}')
+    `;
+
+    db.exec(sql);
+
+    return {
+      id,
+      docId: block.docId,
+      content: block.content,
+      blockOrder: Number(blockOrder),
+      createdAt: now,
+      updatedAt: now,
+    };
+  }
+
+  // 根据 ID 获取 block
+  getById(id: string): Block | null {
+    const stmt = db.prepare('SELECT * FROM blocks WHERE id = ?');
+    const result = stmt.get(id);
+    return result ? (result as Block) : null;
+  }
+
+  // 根据 docId 获取所有 blocks
+  getByDocId(docId: string): Block[] {
+    const stmt = db.prepare('SELECT * FROM blocks WHERE docId = ? ORDER BY blockOrder ASC');
+    const results = stmt.all(docId);
+    return results as Block[];
+  }
+
+  // 更新 block
+  update(id: string, updates: BlockUpdate): Block | null {
+    const existing = this.getById(id);
+    if (!existing) return null;
+
+    const now = new Date().toISOString();
+    const content = updates.content ?? existing.content;
+    const blockOrder = updates.blockOrder ?? existing.blockOrder;
+
+    const stmt = db.prepare(`
+      UPDATE blocks
+      SET content = ?, blockOrder = ?, updatedAt = ?
+      WHERE id = ?
+    `);
+
+    stmt.run(content, blockOrder, now, id);
+
+    return {
+      ...existing,
+      content,
+      blockOrder,
+      updatedAt: now,
+    };
+  }
+
+  // 删除 block
+  delete(id: string): boolean {
+    const stmt = db.prepare('DELETE FROM blocks WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
+  }
+
+  // 获取最大 blockOrder 值
+  getMaxOrder(docId: string): number {
+    const stmt = db.prepare('SELECT MAX(blockOrder) as maxOrder FROM blocks WHERE docId = ?');
+    const result = stmt.get(docId);
+    return (result as { maxOrder: number | null }).maxOrder ?? -1;
+  }
+}
+
+export const blockRepository = new BlockRepository();
