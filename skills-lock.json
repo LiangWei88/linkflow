@@ -71,6 +71,21 @@
       "sourceType": "github",
       "computedHash": "1f6e0333520f25798c7157865db345d3a8befff30e9b7662fc50150fe1895cee"
     },
+    "tanstack-hotkeys-guide": {
+      "source": "vcode-sh/vibe-tools",
+      "sourceType": "github",
+      "computedHash": "3c75195c59c8372d818c1ed2f59ae9fa139e63c450a344ec8186db73aa3a061c"
+    },
+    "tanstack-router-guide": {
+      "source": "vcode-sh/vibe-tools",
+      "sourceType": "github",
+      "computedHash": "76a7ff8122b30377a081d6aaa42e081ace13c6ff59a552826e6ac34d09245006"
+    },
+    "tanstack-start-guide": {
+      "source": "vcode-sh/vibe-tools",
+      "sourceType": "github",
+      "computedHash": "8427d175c9979d227683692254535c8d95b5cd6946ee1f5c3dc8039bc78970ae"
+    },
     "tree-view": {
       "source": "thedaviddias/ux-patterns-for-developers",
       "sourceType": "github",
