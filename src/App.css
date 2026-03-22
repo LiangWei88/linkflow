@@ -1,0 +1,49 @@
+/* 使用 Tailwind CSS 类，不再需要自定义样式 */
+
+/* 编辑器样式 */
+.ProseMirror {
+  @apply min-h-[400px] p-4 border border-gray-200 rounded-md text-base leading-relaxed;
+}
+
+.ProseMirror:focus {
+  @apply outline-none border-blue-500 ring-2 ring-blue-200;
+}
+
+/* 确保 Tiptap 编辑器的基本样式正常 */
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  @apply mt-0 mb-4 font-semibold;
+}
+
+.ProseMirror p {
+  @apply mb-4;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  @apply mb-4 pl-6;
+}
+
+.ProseMirror li {
+  @apply mb-2;
+}
+
+.ProseMirror strong {
+  @apply font-semibold;
+}
+
+.ProseMirror em {
+  @apply italic;
+}
+
+.ProseMirror a {
+  @apply text-blue-600 underline;
+}
+
+.ProseMirror a:hover {
+  @apply text-blue-800 no-underline;
+}
